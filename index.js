@@ -50,14 +50,16 @@ function MyArrayProto() {
   // на початок масиву і повертає новий розмір масиву.
 
   this.unshift = function unshift(...args) {
+    // args.length > 0 ? console.log(this.length += args.length) : typeof Error(`Недопустимый ввод`);
+
     for (let i = (this.length + args.length - 1); i >= args.length; i--) {
-      this[i + 1] = this[i];
+      this[i] = this[--this.length];
     }
     for (let i = 0; i < args.length; i++) {
-      this[i] = args[i - args.length];
+      this[i] = args[i];
     }
-    return this.length += args.length;
   };
+  
 
   // MyArray.prototype.shift();
   // Метод shift() видаляє перший елемент з масиву
@@ -129,46 +131,54 @@ function MyArrayProto() {
       result.push(cb(this[i], i, this));
     }
     return result;
-  }
-};
+  };
 
-// MyArray.prototype.some(), .every(), .filter();
+  // MyArray.prototype.some(), .every(), .filter();
 
-// Метод some() з'ясовує, чи містить масив хоч один елемент,
-// для якого зазначена функція callback повертає true
-// (або значення, що зводиться до true). Повертає значення типу Boolean.
+  // Метод some() з'ясовує, чи містить масив хоч один елемент,
+  // для якого зазначена функція callback повертає true
+  // (або значення, що зводиться до true). Повертає значення типу Boolean.
 
-this.some = function some(checkFunction) {
-  for (let i = 0; i < this.length; i++) {
-    if (checkFunction(this[i], i, this)) {
-      return true;
+  this.some = function some(checkFunction) {
+    for (let i = 0; i < this.length; i++) {
+      if (checkFunction(this[i], i, this)) {
+        return true;
+      }
     }
-  }
-  return false;
-};
+    return false;
+  };
 
-// Метод every() перевіряє, чи всі елементи масиву відповідають
-// умові, що задана функцією, яка передається як аргумент.
-// Повертає булеве значення.
+  // Метод every() перевіряє, чи всі елементи масиву відповідають
+  // умові, що задана функцією, яка передається як аргумент.
+  // Повертає булеве значення.
 
-this.every = function every(checkFunction) {
-  for (let i = 0; i < this.length; i++) {
-    if (!checkFunction(this[i], i, this)) {
-      return false;
+  this.every = function every(checkFunction) {
+    for (let i = 0; i < this.length; i++) {
+      if (!checkFunction(this[i], i, this)) {
+        return false;
+      }
     }
-  }
-  return true;
-};
+    return true;
+  };
 
-// Метод filter() створює новий масив з усіма елементами,
-// що пройшли перевірку вказаною функцією.
+  // Метод filter() створює новий масив з усіма елементами,
+  // що пройшли перевірку вказаною функцією.
 
-this.filter = function filter(checkFunction) {
-  const result = new MyArray();
-  for (let i = 0; i < this.length; i++) {
-    if (checkFunction(this[i], i, this)) {
-      result.push(this[i])
+  this.filter = function filter(checkFunction) {
+    const result = new MyArray();
+    for (let i = 0; i < this.length; i++) {
+      if (checkFunction(this[i], i, this)) {
+        result.push(this[i])
+      }
     }
-  }
-  return result;
+    return result;
+  };
+
 };
+
+
+
+const userArray = new MyArray(1, 2, 3, 4, 5);
+
+console.log(userArray);
+
