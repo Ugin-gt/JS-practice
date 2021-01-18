@@ -59,7 +59,7 @@ function MyArrayProto() {
       this[i] = args[i];
     }
   };
-  
+
 
   // MyArray.prototype.shift();
   // Метод shift() видаляє перший елемент з масиву
@@ -176,9 +176,60 @@ function MyArrayProto() {
 
 };
 
-
-
 const userArray = new MyArray(1, 2, 3, 4, 5);
 
 console.log(userArray);
+
+
+const arr = [1123, 124, 12467, 3, 6, 8545, 8685, 34, 46, 34257, 4];
+const sortArray = [1, 2, 3, 4, 5, 13, 15, 20, 25, 27];
+
+const linearSearch = (arr, value) => {  // O(n) - linear
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === value) {
+      return i;
+    }
+  }
+  // TODO: Если элемент не найден: return -1
+  return -1;
+};
+
+const multuplyTable = (count) => {  // O(n^2) - квадратичная
+  const table = [];
+  for (let i = 1; i < count; i++) {
+    for (let j = 1; j < count; j++) {
+      table.push(`${i} * ${j} = ${i * j}`);
+    }
+  }
+
+
+  return table;
+};
+
+
+const binarySearch = (arr, value) => {  // O(logn) - логарифм
+
+  let start = 0;
+  let end = arr.length - 1;
+  let middle = Math.round(arr.length / 2);
+
+  while (start <= end) {
+    middle = Math.floor((end + start) / 2);
+
+    if (value === arr[middle]) {
+      return middle;
+    }
+    if (value > arr[middle]) {
+      start = middle + 1;
+
+    } else {
+      end = middle - 1
+
+    }
+  }
+}
+
+
+
+
 
