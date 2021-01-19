@@ -201,17 +201,14 @@ const multuplyTable = (count) => {  // O(n^2) - квадратичная
       table.push(`${i} * ${j} = ${i * j}`);
     }
   }
-
-
   return table;
 };
-
 
 const binarySearch = (arr, value) => {  // O(logn) - логарифм
 
   let start = 0;
   let end = arr.length - 1;
-  let middle = Math.round(arr.length / 2);
+  let middle = Math.round(arr.length / 2); 
 
   while (start <= end) {
     middle = Math.floor((end + start) / 2);
